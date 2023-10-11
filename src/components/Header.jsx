@@ -1,8 +1,12 @@
 import foody from '../assets/images/foody.png';
 import cartIcon from '../assets/icons/cart.svg';
 import { Link } from 'react-router-dom';
+import { useCartState } from '../stores/cart/CartStateContext';
 
 export const Header = () => {
+  const [cartState,] = useCartState();
+  const numberOfProductsInCart = cartState.products.length;
+
   return (
     <nav id="header" className="bg-black text-white">
       <div className="w-full container mx-auto flex flex-wrap items center justify-between mt-0 py-2">
@@ -16,8 +20,9 @@ export const Header = () => {
           <Link to="#about" className='text-xl'>About</Link>
         </div>
         <div className="flex items-center justify-center space-x-4">
-          <Link to="/cart">
+          <Link to="/cart" className='mr-4 relative'>
             <img src={cartIcon} alt='cart'/>
+            {numberOfProductsInCart > 0 ? <div className='rounded-full bg-yellow-400 text-white inline-flex justify-center items-center w-full absolute -top-1 -right-1'>{numberOfProductsInCart}</div> : null}
           </Link>
           <Link to="/login">Log In</Link>
           <Link to="/register">Sign up</Link>

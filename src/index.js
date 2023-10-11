@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { CartStateProvider } from './stores/cart/CartStateContext';
+import { MenuStateProvider } from './stores/menu/MenuStateContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <CartStateProvider>
+      <MenuStateProvider>
+        <App />
+      </MenuStateProvider>
+    </CartStateProvider>
   </React.StrictMode>
 );
 

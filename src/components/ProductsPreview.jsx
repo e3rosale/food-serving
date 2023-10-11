@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ProductPreviewCard } from "./ProductPreviewCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { fetchProducts } from "../api";
 
 export const ProductsPreview = () => {
   const [products, setProducts] = useState([]);
@@ -27,7 +28,7 @@ export const ProductsPreview = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8087/api/products')
+    fetchProducts()
       .then(res => res.json())
       .then(data => setProducts(data?.data))
       .catch(e => console.log(e));
